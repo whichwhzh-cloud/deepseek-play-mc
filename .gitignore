@@ -1,0 +1,15 @@
+/build/
+/classes/
+/backups/
+/asset-patch/
+/resources/assets/xixi_interaction/ds_poses.json
+/xixi-interaction-*-preview.jar
+__pycache__/
+*.py[cod]
+*.log
+/.env*
+/config/
+/mods/
+/saves/
+/logs/
+*.ysm

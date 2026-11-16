@@ -1,0 +1,9 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "xixi.interaction.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": ["CompanionBrainMixin", "PairPushMixin", "CombatPoseCleanupMixin", "NumenSteeringMixin", "NumenRouteCostMixin"],
+  "client": ["PlayerModelMixin", "InteractionCameraMixin", "HandFormationRenderMixin", "LapHeadRenderMixin", "LapPlacementRenderMixin", "YsmFaceRenderMixin"],
+  "injectors": {"defaultRequire": 1}
+}

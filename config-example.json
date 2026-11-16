@@ -1,0 +1,10 @@
+{
+  "maxSeconds": 600,
+  "alignPositions": true,
+  "enableCarry": false,
+  "enableBackCarry": true,
+  "enableRainUmbrella": true,
+  "enableSleepIdle": true,
+  "enableIdleBackHug": true,
+  "layouts": {}
+}
