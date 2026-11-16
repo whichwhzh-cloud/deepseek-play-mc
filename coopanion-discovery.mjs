@@ -3,7 +3,8 @@
   if (gameTool) {
     const xixiHelp = '汐的 DS 鲸鱼娘：贴纸与模型自带动作可直接通过 Minecraft Lua 调用。显示爱心：return ysm.xixi_expression.sticker(3, 8)；收起：return ysm.xixi_expression.sticker(0, 4)；单独脸红：return ysm.xixi_expression.blush(4)。查全部原生动作：return ysm.xixi_actions.list()；按返回的 ID 播放，例如 return ysm.xixi_actions.play("点头", 0)；停止：return ysm.xixi_actions.stop()。原生动作请用这个列表和原样的 ID。';
     const routeHelp = '寻路遇到浅水、岸边或草地台阶，先看落脚高度。优先用带 y 的短距离落脚点，陆地沿台阶正向上下，入水后先找就近可浮起且能上岸的位置。路线失败后最多换一条短路线重试，仍失败就报告卡点。';
-    gameTool.description = xixiHelp + ' ' + routeHelp + ' ' + gameTool.description;
+    const flightHelp = '玩家明确要求汐飞行时，用 return xixi_interaction.flight.takeoff() 原地升高三格，用 return xixi_interaction.flight.to(x, y, z) 飞到脚下坐标，用 return xixi_interaction.flight.land() 垂直降落。需要伙伴本人已经处于创造模式。结果的 reached 为 true 才算到达。';
+    gameTool.description = xixiHelp + ' ' + flightHelp + ' ' + routeHelp + ' ' + gameTool.description;
     const invoke = gameTool.handler;
     gameTool.handler = async args => {
       const result = await invoke(args);

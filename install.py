@@ -1,8 +1,8 @@
 """Local installer: merge owned animation keys, backup, rollback on failure. No game launch."""
 import argparse, hashlib, json, os, pathlib, shutil, struct, subprocess, sys, time, uuid, zipfile
 BASE=pathlib.Path(__file__).resolve().parent
-JAR='xixi-interaction-0.6.1-preview.jar'
-CORE_JAR='xixi-interaction-0.6.1-core.jar'
+JAR='xixi-interaction-0.6.2-preview.jar'
+CORE_JAR='xixi-interaction-0.6.2-core.jar'
 MODELS=('xixi-action-prototype','xixi-player-hug-test')
 TOOL_START='/* BEGIN XIXI INTERACTION TOOLS */'
 TOOL_END='/* END XIXI INTERACTION TOOLS */'

@@ -107,7 +107,9 @@ public final class InteractionMod {
             api.api("expression","Choose, replace, or clear your own stickers and blush.",ExpressionApi.class);
             api.api("actions","List and play your equipped DS whale model's native actions.",NativeActions.class);
             api.api("control","Dispatch explicit owner requests for stickers or native animations. The /xixi command is also available.",DirectControl.class);
-            api.contributeBodyState(n->bodyState(n.getUUID()));
+            CreativeFlight.register(api);
+            api.contributeBodyState(n->bodyState(n.getUUID())+(CreativeFlight.permitted(n)
+                ?" 创造飞行用 xixi_interaction.flight.takeoff()、flight.to(x, y, z) 或 flight.land()。":""));
             api.registerEventType(PAT_EVENT,false);
             api.registerEventType(ACTION_EVENT,false);
             numenApi=api;
@@ -400,7 +402,7 @@ public final class InteractionMod {
     static boolean occupied(NumenPlayer companion){return SESSIONS.containsKey(companion.getOwnerUuid());}
     static boolean ambientSafe(NumenPlayer companion){
         if(!companion.isAlive()||companion.isRemoved()||companion.isPassenger()
-            ||companion.isSleeping()||companion.isInWater()||companion.isInLava()||companion.isOnFire()
+            ||companion.isSleeping()||companion.getAbilities().flying||companion.isInWater()||companion.isInLava()||companion.isOnFire()
             ||companion.hurtTime>0||companion.getHealth()<=5)return false;
         return companion.level().getEntities(companion,companion.getBoundingBox().inflate(8),e->e instanceof Enemy&&e.isAlive()).isEmpty();
     }

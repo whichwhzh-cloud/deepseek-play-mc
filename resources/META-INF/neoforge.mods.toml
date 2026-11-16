@@ -3,7 +3,7 @@ loaderVersion="[4,)"
 license="MIT"
 [[mods]]
 modId="xixi_interaction"
-version="0.6.1-preview"
+version="0.6.2-preview"
 displayName="Xixi Interaction Menu"
 description='''Local singleplayer right-click interaction menu with seated branches and Shift cancellation.'''
 [[mixins]]

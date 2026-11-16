@@ -41,6 +41,20 @@
 | `hug`, `back_hug`, `hand` | 正抱、背抱、牵手 |
 | `umbrella`, `carry`, `lift`, `sleep` | 共伞、背负、实验抱起、手动睡眠预览 |
 
+## 创造飞行
+
+先切换伙伴本人到创造模式。以伙伴 `xixi` 为例，有命令权限的玩家可执行 `/gamemode creative xixi`。之后可以直接在 Numen 对话里要求「飞起来」「飞到指定坐标」或「降落」。
+
+| Lua 调用 | 用途 |
+| --- | --- |
+| `xixi_interaction.flight.takeoff()` | 垂直升高 3 格并悬停 |
+| `xixi_interaction.flight.to(10.5, 80, 20.5)` | 飞到 48 格内的脚下坐标。沿直线飞行，遇到遮挡时可以另选中途点 |
+| `xixi_interaction.flight.land()` | 在脚下 48 格内找最近的落脚面，垂直降落 |
+| `xixi_interaction.flight.status()` | 查看飞行权限、当前飞行状态及脚下坐标 |
+| `xixi_interaction.flight.stop()` | 通过可并发调用的控制入口取消飞行任务，在空中时保持悬停。同一个 MCP Lua 执行槽仍按 Numen 的串行规则运行 |
+
+飞行结果为包含 `reached` 与 `message` 的记录，只有 `reached=true` 表示到达。玩家和伙伴须在线且同维度。飞行使用伙伴已有的创造权限，只走已加载的区块。普通的 `numen.move.to` 继续沿地面走，接到步行等身体任务时退出悬停。建议先让伙伴降落，再下达地面任务或开始双人动作。
+
 ## 游戏事件
 
 | 事件 | 数据 |

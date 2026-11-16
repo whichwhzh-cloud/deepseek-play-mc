@@ -18,7 +18,7 @@ Numen 自带 MCP 和 Lua SDK。Numen 自带的 AI 与外接 MCP 大脑可按需�
 
 ## 安装和试玩
 
-1. 关闭游戏，将 `xixi-interaction-0.6.1-core.jar` 复制到目标实例的 `mods/`。更新时先移走同一模组的旧 JAR。需要备份和回滚时，可以用下面的安装脚本替代手动复制。
+1. 关闭游戏，将 `xixi-interaction-0.6.2-core.jar` 复制到目标实例的 `mods/`。更新时先移走同一模组的旧 JAR。需要备份和回滚时，可以用下面的安装脚本替代手动复制。
 2. 进入单人世界，按 `N` 打开 Numen 面板，召唤属于自己的伙伴。建议命名为 `xixi`，以启用按此名称查找伙伴的可选 Coopanion 工具和空闲背抱。
 3. 在 YSM 中将玩家和伙伴都切回普通皮肤。找一块安全空地，在 3 格内空手右键伙伴。选「一起坐下」后可再次右键选依靠、膝枕或梳头分支。
 4. 按 Shift 停止配对动作。Esc 关闭菜单。主动邀请出现在聊天栏和伙伴的右键菜单，由玩家接受。
@@ -43,7 +43,9 @@ python .\install.py --rollback '.\backups\安装时输出的目录名'
 
 `config/xixi-interaction.json` 首次进世界时生成。可用 `enableBackCarry`、`enableCarry`、`enableRainUmbrella`、`enableSleepIdle`、`enableIdleBackHug` 控制相应行为。`maxSeconds` 是双人互动上限，默认 600 秒。互动会暂时占用伙伴的移动身体；取消互动后可以继续下达身体任务。
 
-0.6.1 调整了 Numen 的路径代价与水中移动方向。遇到高低差优先规划直向台阶，水中朝当前路径点转向，搜索时降低长时间潜水路线的优先级。详细的观察步骤见 [验收指南](docs/VERIFY.md)。
+0.6.2 增加创造飞行。将伙伴本人切到创造模式后，可以通过 Numen 对话让她飞起来、飞到指定坐标或降落。她会沿空中路线逐步移动，抵达后悬停，遇到障碍会停下。如何调用见 [接口接入指南](docs/INTERFACES.md)。
+
+0.6.1 调整了 Numen 的路径代价与水中移动方向。高低差优先规划直向台阶，水中朝当前路径点转向，并降低长时间潜水路线的优先级。观察步骤见 [验收指南](docs/VERIFY.md)。
 
 ## 构建和 Git 分享
 

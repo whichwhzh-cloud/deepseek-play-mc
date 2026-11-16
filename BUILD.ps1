@@ -10,7 +10,7 @@ $mc=if($MinecraftRoot){(Resolve-Path -LiteralPath $MinecraftRoot).Path}else{Spli
 $runtime=Join-Path $mc 'runtime\windows-x64\java-runtime-epsilon'
 $java=if($JavaHome){Join-Path $JavaHome 'bin'}elseif(Test-Path "$runtime\bin\javac.exe"){Join-Path $runtime 'bin'}else{Split-Path (Get-Command javac.exe -ErrorAction Stop).Source}
 $CoreOnly=$CoreOnly -or !(Test-Path -LiteralPath "$PSScriptRoot\asset-patch" -PathType Container)
-$outputName=if($CoreOnly){'xixi-interaction-0.6.1-core.jar'}else{'xixi-interaction-0.6.1-preview.jar'}
+$outputName=if($CoreOnly){'xixi-interaction-0.6.2-core.jar'}else{'xixi-interaction-0.6.2-preview.jar'}
 $build=Join-Path $PSScriptRoot ('build\'+[guid]::NewGuid().ToString('N'))
 $classes=Join-Path $build 'classes'
 $testClasses=Join-Path $build 'tests'
@@ -48,10 +48,11 @@ $arguments=@('-proc:none','--release','21','-encoding','UTF-8','-cp',('"'+$cp.Re
 $argFile=Join-Path $build 'compile.args'
 [IO.File]::WriteAllLines($argFile,$arguments,[Text.UTF8Encoding]::new($false))
 & "$java\javac.exe" "@$argFile"; if($LASTEXITCODE){throw 'Compilation failed'}
-& "$java\javac.exe" -proc:none -encoding UTF-8 -cp "$classes;$cp" -d $testClasses "$PSScriptRoot\tests\RulesTest.java" "$PSScriptRoot\tests\BytecodeTest.java"
+& "$java\javac.exe" -proc:none -encoding UTF-8 -cp "$classes;$cp" -d $testClasses "$PSScriptRoot\tests\RulesTest.java" "$PSScriptRoot\tests\BytecodeTest.java" "$PSScriptRoot\tests\FlightTest.java"
 if($LASTEXITCODE){throw 'Test compilation failed'}
 & "$java\java.exe" -cp "$testClasses;$classes" RulesTest; if($LASTEXITCODE){throw 'Rules tests failed'}
 & "$java\java.exe" -cp "$testClasses;$cp" BytecodeTest; if($LASTEXITCODE){throw 'Mixin targets do not match'}
+& "$java\java.exe" -cp "$testClasses;$classes;$cp" xixi.interaction.FlightTest; if($LASTEXITCODE){throw 'Flight tests failed'}
 if(!$CoreOnly){
     python "$PSScriptRoot\bake_ds_poses.py"; if($LASTEXITCODE){throw 'DS pose generation failed'}
     python "$PSScriptRoot\validate_assets.py"; if($LASTEXITCODE){throw 'Assets invalid'}
